@@ -9,6 +9,27 @@ int A[N];
 A[0], A[1], ..., A[n-1] をソートして昇順に書き換える関数
 */
 void quick_sort(int A[], int n){
+  int i, j, l, pivot;
+
+  if (n <= 1) return;
+
+  pivot = A[0];
+  for (i = j = 0, l = 0; i + l < n; i++) {
+    if (A[i] < pivot) {
+      int z = A[j];
+      A[j] = A[i];
+      A[i] = z;
+      j++;
+    } else if (A[i] > pivot) {
+      int z = A[n - l - 1];
+      A[n - l - 1] = A[i];
+      A[i] = z;
+      i--;
+      l++;
+    }
+  }
+  quick_sort(A, j);
+  quick_sort(A + n - l, l);
 }
 
 int main(){
